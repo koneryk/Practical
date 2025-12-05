@@ -1,0 +1,53 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.section_one_block{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background: url(./image/blurred-office-background-illustration-ai-generative-free-photo.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.one_block{
+    width: 700px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: center;
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+h1{
+    color:ivory;
+    font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+.input{
+    width: 100px;
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0);
+}
+.create{
+    width: 150px;
+    height: 70px;
+    border-color: blue;
+    color: black;
+    box-shadow: 0 0 40px 40px blue inset, 0 0 0 0 blue;
+    transition: all 150ms ease-in-out;
+}
+.create:hover{
+    box-shadow: 0 0 10px 0 blue inset, 0 0 10px 4px blue;
+    border: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+}
