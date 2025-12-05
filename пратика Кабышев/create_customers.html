@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="create_customers_section">
+        <div class="create_customers">
+            <h1 id="h1_id"></h1>
+            <input id="course" type="text">
+            <input id="data_course" type="date">
+            <input id="change_pay" type="text">
+            <button id="output">Отправить заявку</button>
+            <a href="./avtoriz.html" class="avtoriz_form">Вход</a>
+
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
+    <script>
+ initSqlJs({ locateFile: filename => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${filename}` })
+    .then(async (SQL) => {
+      let db;
+      let user;
+
+      async function load_sql() {
+        const dataStr = localStorage.getItem("sqlitedb");
+        if (dataStr) {
+          const uint8Array = Uint8Array.from(JSON.parse(dataStr));
+          return uint8Array;
+        }
+        return null;
+      }
+
+      async function load_user() {
+        const result = localStorage.getItem("result");
+        if (result) {
+          return JSON.parse(result);
+        }
+        return null;
+      }
+
+      function displayOrders() {
+        const res = db.exec("SELECT * FROM Orders;");
+        if (res.length === 0) {
+          console.log("Таблица Orders пуста");
+          return;
+        }
+        const columns = res[0].columns;
+        const values = res[0].values;
+        console.table(values.map(row => {
+          const obj = {};
+          columns.forEach((col, index) => {
+            obj[col] = row[index];
+          });
+          return obj;
+        }));
+      }
+
+      const dbData = await load_sql();
+      if (dbData) {
+        db = new SQL.Database(dbData);
+      } if (!dbData) {
+    db = new SQL.Database();
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS Orders (
+        id_orders INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        course TEXT,
+        data_course TEXT,
+        change_pay TEXT,
+        State TEXT DEFAULT 'Новая',
+        Comments TEXT DEFAULT '',
+        FOREIGN KEY(user_id) REFERENCES Users(user_id)
+      );
+    `);
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS Users (
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT
+      );
+    `);
+}
+      user = await load_user();
+
+      const h1_name = document.getElementById("h1_id");
+      if (user && user[1]) {
+        h1_name.textContent = `Добро пожаловать: ${user[1]}`;
+      } else {
+        h1_name.textContent = `Добро пожаловать, посетитель`;
+      }
+
+      document.getElementById("output").addEventListener("click", () => {
+        if (!user || !user[0]) {
+          alert("Пожалуйста, войдите или зарегистрируйтесь.");
+          return;
+        }
+
+        const course = document.getElementById("course").value.trim();
+        const dataDate = document.getElementById("data_course").value;
+        const changePay = document.getElementById("change_pay").value.trim();
+
+        if (!course || !dataDate || !changePay) {
+          alert("Пожалуйста, заполните все поля.");
+          return;
+        }
+
+        const stmt = db.prepare(`
+        INSERT INTO Orders (user_id, course, data_course, change_pay, State,Comments)
+        VALUES (?, ?, ?, ?, 'Новая','')
+        `);
+        stmt.run([user[0], course, dataDate, changePay]);
+        stmt.free();
+
+        displayOrders();
+
+        const data = db.export();
+        const binary = Array.from(data);
+        localStorage.setItem("sqlitedb", JSON.stringify(binary));
+
+        alert("Заказ добавлен!");
+      });
+displayOrders()
+    });
+    </script>
+</body>
+</html>

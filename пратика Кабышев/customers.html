@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <section class="section_one_block">
+        <div class="one_block">
+            <h1 id="h1_id"></h1>
+            <div id="ordersContainer"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <a href="./avtoriz.html" class="vhod">Вход</a>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
+        <script>
+            initSqlJs({ locateFile: filename => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${filename}` })
+    .then(async (SQL) => {
+        let db;
+      let user;
+
+      async function load_sql() {
+        const dataStr = localStorage.getItem("sqlitedb");
+        if (dataStr) {
+          const uint8Array = Uint8Array.from(JSON.parse(dataStr));
+          return uint8Array;
+        }
+        return null;
+      }
+
+      async function load_user() {
+        const result = localStorage.getItem("result");
+        if (result) {
+          return JSON.parse(result);
+        }
+        return null;
+      }
+      const dbData = await load_sql();
+      if (dbData) {
+        db = new SQL.Database(dbData);}
+        user = await load_user();
+        if (!user || !user[0]) {
+          alert("Пожалуйста, войдите или зарегистрируйтесь.");
+          return;
+        }
+        
+        const h1_name = document.getElementById("h1_id");
+      if (user && user[1]) {
+        h1_name.textContent = `Добро пожаловать: ${user[1]}`;
+      } else {
+        h1_name.textContent = `Добро пожаловать, посетитель`;
+      }
+      displayOrders();
+      function displayOrders() {
+        console.log("Функция вызвана")
+  const container = document.getElementById('ordersContainer');
+  container.innerHTML = '';
+  
+
+  const res = db.exec("SELECT * FROM Orders;");
+  if (res.length === 0 || res[0].values.length === 0) {
+    container.innerHTML = "<p>Нет заказов</p>";
+    return;
+  }
+const tableInfoRes = db.exec("PRAGMA table_info(Orders);");
+console.log(tableInfoRes);
+  res[0].values.forEach(order => {
+    const [id_orders, user_id, course, data_course, change_pay, State, Comments] = order;
+
+    const orderDiv = document.createElement('div');
+    orderDiv.className = 'order';
+
+    orderDiv.innerHTML = `
+      <p>Заказ #${id_orders}</p>
+      <p>Курс: ${course}</p>
+      <p>Дата курса: ${data_course}</p>
+      <p>Способ оплаты: ${change_pay}</p>
+      <p>Статус: ${State}</p>
+      <p>Отзыв: ${Comments || 'Нет'}</p>
+      <button data-id="${id_orders}" class="leaveReview">Оставить отзыв</button>
+      <hr>
+    `;
+    container.appendChild(orderDiv);
+  });
+
+
+document.querySelectorAll('.leaveReview').forEach(btn => {
+  btn.onclick = () => {
+    const orderId = btn.getAttribute('data-id');
+    const review = prompt("Напишите ваш отзыв по заказу:");
+    if (review !== null && review.trim() !== '') {
+      db.run(`UPDATE Orders SET Comments = ? WHERE orders_id = ?;`, [review, orderId]);
+      
+      const data = db.export();
+      const binary = Array.from(data);
+      localStorage.setItem("sqlitedb", JSON.stringify(binary));
+      
+      displayOrders();
+    }
+  };
+});
+}
+
+    })
+        </script>
+    </section>
+</body>
+</html>
