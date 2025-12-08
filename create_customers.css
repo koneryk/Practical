@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
     font-family: "Unbounded", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -13,7 +14,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: #0f0f0f; 
+    background-color: #f0f8ff; 
 }
 
 .create_customers {
@@ -30,11 +31,11 @@ input {
     text-align: center;
     height: 60px;
     width: 150px;
-    background-color: rgba(255, 255, 255, 0.2); 
-    color: white;
+    background-color: #e0f7fa; 
+    color: #004d66; 
     outline: none;
-    border: none; 
-    border-radius: 8px; 
+    border: none;
+    border-radius: 8px;
     padding: 0 10px;
     font-family: "Unbounded", sans-serif;
     font-size: 1rem;
@@ -42,11 +43,12 @@ input {
 }
 
 input:focus {
-    box-shadow: 0 0 8px rgba(255,255,255,0.4);
+    box-shadow: 0 0 8px rgba(0, 77, 102, 0.4);
+    background-color: #b2ebf2; 
 }
 
 h1 {
-    color: white;
+    color: #005f73; 
     text-transform: uppercase;
     font-weight: bold;
     font-family: "Unbounded", sans-serif;
@@ -58,28 +60,28 @@ h1 {
 }
 
 p {
-    color: white;
+    color: #005f73;
     margin: 10px 0;
 }
 
 a {
     text-decoration: none;
     width: 17.5%;
-    color: #ffffff;
+    color: #006494;
     font-family: "Unbounded", sans-serif;
     font-size: 1rem;
-    transition: color 0.3s ease;
+    transition: color 0.3s;
 }
 
 a:hover {
-    color: #ddd;
+    color: #0096c7; 
 }
 
 button {
     height: 60px;
     width: 150px;
-    color: black;
-    background-color: white;
+    color: #000; 
+    background-color: #66c2ff; 
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -89,12 +91,12 @@ button {
 }
 
 button:hover {
-    background-color: rgb(227, 225, 225);
-    outline: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: #3399cc; 
+    outline: 1px solid rgba(0,0,0,0.2);
 }
 
 footer {
-    background-color: #0f0f0f; 
+    background-color: #f0f8ff; 
     padding-top: 75px;
     padding-bottom: 75px;
     width: 100%; 
@@ -103,17 +105,18 @@ footer {
     align-items: center;
     text-align: center;
 }
-@media (max-width:400px){
-    h1{
+
+@media (max-width: 400px) {
+    h1 {
         font-size: 32px;
         padding: 20px;
     }
-    .div_input{
+    .div_input {
         display: flex;
         flex-direction: column;
         gap: 20px;
     }
-    footer{
+    footer {
         padding-top: 35px;
         padding-bottom: 35px;
     }

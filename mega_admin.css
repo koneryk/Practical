@@ -11,23 +11,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  background: linear-gradient(135deg, #0a1f44, #1e3a8a);
 }
-
+.image_pre{
+  background-image: url(./image/i-no-bg-preview\ \(carve.photos\).png);
+  background-size: contain;
+  width: 200px;
+  height: 200px;
+}
 .one_block {
-  background-color: rgba(20, 20, 20, 0.95);
+  background-color: rgba(10, 25, 60, 0.95);
   border-radius: 15px;
   padding: 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 30, 80, 0.6);
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 20px;
+  align-items: center;
 }
 
 .vhod {
   align-self: flex-end;
-  color: #ffffff;
+  color: #a5d8ff;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
@@ -35,29 +41,33 @@
 }
 
 .vhod:hover {
-  color: #dddddd;
+  color: #e0f2ff;
 }
-#ordersContainer{
+
+#ordersContainer {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  margin-top: 20px;
 }
+
 #ordersContainer table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #1f1f1f;
-  color: #ffffff;
+  background-color: #10294b;
+  color: #e0f2fe;
   font-size: 0.95rem;
 }
 
 #ordersContainer th,
 #ordersContainer td {
   padding: 12px 10px;
-  border: 1px solid #333;
+  border: 1px solid #154a7b;
   text-align: left;
 }
 
 #ordersContainer thead {
-  background-color: #2a2a2a;
+  background-color: #1c3e70;
 }
 
 #ordersContainer th {
@@ -65,17 +75,17 @@
 }
 
 #ordersContainer tbody tr:nth-child(even) {
-  background-color: #252525;
+  background-color: #16375e;
 }
 
 #ordersContainer tbody tr:hover {
-  background-color: #333;
+  background-color: #204575;
 }
 
 #ordersContainer button {
   padding: 6px 12px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #e0f2fe;
+  color: #0a1f44;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -84,23 +94,24 @@
 }
 
 #ordersContainer button:hover {
-  background-color: #e3e1e1;
+  background-color: #c0e0fc;
 }
 
 #ordersContainer:empty::before {
   content: "Нет заявок.";
-  color: #cccccc;
+  color: #a0bcd8;
   font-style: italic;
   text-align: center;
   display: block;
   padding: 20px 0;
 }
-@media (max-width:400px) {
-  .one_block_section{
+
+@media (max-width: 400px) {
+  .one_block_section {
     flex-wrap: wrap;
     width: 237%;
   }
-  .one_block{
+  .one_block {
     flex-wrap: wrap;
   }
 }

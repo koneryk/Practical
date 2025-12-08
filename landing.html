@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+    <section class="one_block">
+        <nav class="nav-bar">
+            <div class="nav-bar_2">
+                <img src="./image/image03.png" alt="" srcset="">
+                <p>Корочки.есть</p>    
+            </div>
+
+                
+                <a href="./avtoriz.html"><p class="nav_avtoriz">Вход</p></a>
+
+        </nav>
+        <div class="main-page">
+            <p>Корочки.есть - это современная онлайн-платформа, которая предлагает широкий ассортимент учебных курсов для получения профессиональных сертификатов и удостоверений. Платформа ориентирована на тех, кто хочет повысить квалификацию, получить новые навыки или сменить сферу деятельности. Курсы на сайте разработаны экспертами и позволяют обучаться в удобное время и в любом месте, предлагая качественные материалы, практические задания и поддержку преподавателей. 'Корочки' — это ваш надежный помощник на пути профессионального роста и развития.</p>
+        </div>
+    </section>
+<section class="two_block">
+        <div class="operating-container" id="operating-container">
+            <div class="op-item">
+            <div class="content">
+                <div class="img_one"></div>
+                <p>Мы предлагаем оптимальные цены за высококачественные услуги и курсы, обеспечивая максимум ценности для каждого клиента.</p>
+            </div>
+        </div>
+        <div class="operating-container" id="operating-container">
+            <div class="op-item">
+            <div class="content">
+                <div class="img_two"></div>
+                <p>Наши специалисты бесплатно выезжают для консультаций и оценки ваших потребностей, чтобы подобрать наиболее эффективное решение.</p>
+            </div>
+        </div>
+        <div class="operating-container" id="operating-container">
+            <div class="op-item">
+            <div class="content">
+                <div class="img_three"></div>
+                <p>Более 0 лет на рынке — мы накопили богатый опыт и знания для успешной реализации любых задач.</p>
+            </div>
+        </div>
+        <div class="operating-container" id="operating-container">
+            <div class="op-item">
+            <div class="content">
+                <div class="img_four"></div>
+                <p>Мы уверены в качестве предоставляемых услуг и курсов, поэтому гарантируем удовлетворение ваших требований и результатов.</p>
+            </div>
+        </div>
+        <div class="operating-container" id="operating-container">
+            <div class="op-item">
+            <div class="content">
+                <div class="img_five"></div>
+                <p>Беремся за самые сложные проекты и задачи, используя профессиональный подход и инновационные решения.</p>
+            </div>
+        </div>
+        <div class="operating-container" id="operating-container">
+            <div class="op-item">
+            <div class="content">
+                <div class="img_six"></div>
+                <p>Все услуги оформляются официально с полным юридическим сопровождением для вашей безопасности и прозрачности сотрудничества.</p>
+            </div>
+        </div>
+        <div class="operating-container" id="operating-container">
+            <div class="op-item">
+            <div class="content">
+                <div class="img_seven"></div>
+                <p>Для вашего удобства принимаем оплату как наличными, так и по безналичному расчёту, включая различные способы оплаты.</p>
+            </div>
+        </div>
+        <div class="operating-container" id="operating-container">
+            <div class="op-item">
+            <div class="content">
+                <div class="img_eith"></div>
+                <p>Мы строго придерживаемся установленных сроков выполнения работы, гарантируя своевременный результат и планирование.</p>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div class="control-buttons">
+        <button id="prevBtn">← Назад</button>
+        <button id="nextBtn">Вперед →</button>
+    </div>
+</section>
+
+<script>
+const items = document.querySelectorAll('.op-item');
+const itemsPerPage = 2;
+let currentStartIndex = 0;
+
+function showItems(startIndex) {
+    items.forEach(item => item.style.display = 'none');
+
+    for (let i = startIndex; i < startIndex + itemsPerPage; i++) {
+        if (i >= 0 && i < items.length) {
+            items[i].style.display = '';
+        }
+    }
+}
+
+showItems(currentStartIndex);
+
+document.getElementById('nextBtn').onclick = () => {
+    currentStartIndex += itemsPerPage;
+    if (currentStartIndex >= items.length) {
+        currentStartIndex = 0; 
+    }
+    showItems(currentStartIndex);
+};
+
+document.getElementById('prevBtn').onclick = () => {
+    currentStartIndex -= itemsPerPage;
+    if (currentStartIndex < 0) {
+        currentStartIndex = Math.max(0, items.length - itemsPerPage);
+    }
+    showItems(currentStartIndex);
+};
+</script>
+    </section>
+</body>
+</html>

@@ -1,125 +1,139 @@
-*{
-    margin: 0;
-    padding: 0;
-    font-family: "Unbounded", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    transition-duration: 1s;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  transition: 0.3s ease;
+  box-sizing: border-box;
 }
 
+.section_one_block {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #f0f8ff;
+  color: #333;
+}
 
-.section_one_block{
-    width: 100vw;
-    height: 100vh;    
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.one_block {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  align-items: center;
 }
-.one_block{
-    width: inherit;
-    height: inherit;
-    background-color: #0f0f0f;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: center;
-    align-items: center;
 
+h1 {
+  font-size: 3rem;
+  color: #007acc;
+  text-transform: uppercase;
+  font-weight: bold;
 }
-footer{
-    background-color: #0f0f0f;
-    padding-top: 75px;
-    padding-bottom: 75px;
-    width: inherit;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
+
+p {
+  color: #005999;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  max-width: 600px;
 }
-.silki{
-    display: flex;
-    color: white;
-    width: 80%;
-    display: flex;
-    justify-content: space-evenly;
+
+a {
+  color: #007acc;
+  text-decoration: none;
 }
-h1{
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-family: "Unbounded", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-size: xxx-large;
+
+.div_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 280px;
+  max-width: 400px;
+  width: 100%;
 }
-p{
-    color: white;
+
+input {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  font-size: 1rem;
+  background-color: rgba(0, 122, 204, 0.1);
+  border: 1px solid #007acc;
+  border-radius: 5px;
+  color: #005999;
+  outline: none;
 }
-a{
-    text-decoration: none;
-    width: auto;
+
+button {
+  width: 100%;
+  max-width: 400px;
+  padding: 15px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007acc;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-.div_wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 200px;
-    max-width: 400px;
-    min-width: 200px;
+
+button:hover {
+  background-color: #005fa3;
 }
-input{
-    height: 60px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.3);
-    color: white;
-    outline: none;
-    border: hidden;
-    min-width: 200px;
-    max-width: 400px;
+
+.image {
+  width: 200px;
+  height: 200px;
+  background-image: url(./image/image03.png);
+  background-position: center;
+  background-size: cover;
+  border-radius: 8px;
 }
-button{
-    height: 60px;
-    color: black;
-    background-color: white;
-    transition: 0.3s;
-    min-width: 200px;
+
+footer {
+  background-color: #e6f2ff;
+  padding: 60px 20px;
+  text-align: center;
+  color: #005999;
 }
-button:hover{
-    background-color: rgb(227, 225, 225);
-    background-color: rgb(227, 225, 225);
-    outline:1px solid rgba(255, 255, 255, 0.3);
-    outline-width: 3px;
+
+.silki {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-.image{
-    background-image: url(./image/i-no-bg-preview\ \(carve.photos\).png);
-    background-position: center;
-    background-size: cover;
-    width: 200px;
-    height: 200px;
+
+.silki a {
+  color: #007acc;
+  font-weight: 500;
 }
-@media (max-width:400px){
-    *{
-        text-align: center;
-        align-items: center;
-    }
-    button{
-        width: 70%;
-    }
-    input{
-        width: 70%;
-    }
-    h1{
-        font-size: 32px;
-    }
-    footer{
-        padding-top: 30px;
-        padding-bottom: 30px;
-    }
-    footer .silki{
-        width: 100%;
-        text-wrap: wrap;
-    }
-    .registration{
-        width: auto;
-    }
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .div_wrapper {
+    height: auto;
+    gap: 15px;
+  }
+
+  input, button {
+    width: 90%;
+  }
+
+  .image {
+    width: 150px;
+    height: 150px;
+  }
+
+  footer {
+    padding: 30px 10px;
+  }
 }
