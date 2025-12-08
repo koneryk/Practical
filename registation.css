@@ -4,6 +4,7 @@
   font-family: "Unbounded", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+  transition-duration: 1s;
 }
 
 .section_one_block {
@@ -18,8 +19,9 @@
 }
 
 .one_block {
-  width: 400px;
-  min-height: 600px;
+  max-width: 400px;
+  min-width: 200px;
+  min-height: 500px;
   background-color: rgba(20, 20, 20, 0.95); 
   border-radius: 15px;
   display: flex;
@@ -98,4 +100,27 @@ footer {
 
 .vhod:hover {
   color: #ddd;
+}
+@media (max-width:400px){
+  *{
+        text-align: center;
+        align-items: center;
+    }
+    button{
+        width: 70%;
+    }
+    input{
+        width: 70%;
+    }
+    h1{
+      font-size: 32px;
+      padding-bottom: 15px;
+    }
+    footer{
+        width: 100%;
+    }
+    footer .silki{
+        width: 100vw;
+        text-wrap: wrap;
+    }
 }

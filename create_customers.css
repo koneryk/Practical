@@ -4,6 +4,7 @@
     font-family: "Unbounded", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    transition: 1s;
 }
 
 .create_customers_section {
@@ -101,4 +102,19 @@ footer {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+@media (max-width:400px){
+    h1{
+        font-size: 32px;
+        padding: 20px;
+    }
+    .div_input{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    footer{
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
 }

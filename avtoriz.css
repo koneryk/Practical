@@ -4,6 +4,7 @@
     font-family: "Unbounded", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+    transition-duration: 1s;
 }
 
 
@@ -38,7 +39,7 @@ footer{
 .silki{
     display: flex;
     color: white;
-    width: 70%;
+    width: 80%;
     display: flex;
     justify-content: space-evenly;
 }
@@ -56,14 +57,15 @@ p{
 }
 a{
     text-decoration: none;
-    width: 17.5%;
+    width: auto;
 }
 .div_wrapper{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 200px;
-    width: 400px;
+    max-width: 400px;
+    min-width: 200px;
 }
 input{
     height: 60px;
@@ -72,12 +74,15 @@ input{
     color: white;
     outline: none;
     border: hidden;
+    min-width: 200px;
+    max-width: 400px;
 }
 button{
     height: 60px;
     color: black;
     background-color: white;
     transition: 0.3s;
+    min-width: 200px;
 }
 button:hover{
     background-color: rgb(227, 225, 225);
@@ -91,4 +96,30 @@ button:hover{
     background-size: cover;
     width: 200px;
     height: 200px;
+}
+@media (max-width:400px){
+    *{
+        text-align: center;
+        align-items: center;
+    }
+    button{
+        width: 70%;
+    }
+    input{
+        width: 70%;
+    }
+    h1{
+        font-size: 32px;
+    }
+    footer{
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    footer .silki{
+        width: 100%;
+        text-wrap: wrap;
+    }
+    .registration{
+        width: auto;
+    }
 }

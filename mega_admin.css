@@ -15,8 +15,6 @@
 }
 
 .one_block {
-  width: 90%;
-  max-width: 800px;
   background-color: rgba(20, 20, 20, 0.95);
   border-radius: 15px;
   padding: 30px;
@@ -39,7 +37,10 @@
 .vhod:hover {
   color: #dddddd;
 }
-
+#ordersContainer{
+  display: flex;
+  flex-wrap: wrap;
+}
 #ordersContainer table {
   width: 100%;
   border-collapse: collapse;
@@ -93,4 +94,13 @@
   text-align: center;
   display: block;
   padding: 20px 0;
+}
+@media (max-width:400px) {
+  .one_block_section{
+    flex-wrap: wrap;
+    width: 237%;
+  }
+  .one_block{
+    flex-wrap: wrap;
+  }
 }

@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Unbounded", sans-serif;
+  transition-duration: 1s;
 }
 
 body {
@@ -76,6 +77,7 @@ button {
   color: #000;
   font-size: 1.2rem;
   cursor: pointer;
+  min-width: 100px;
   transition: all 0.3s ease;
   font-family: "Unbounded", sans-serif;
   font-weight: 600;
@@ -152,4 +154,16 @@ button:hover {
   text-align: center;
   font-style: italic;
   color: #999;
+}
+@media (max-width:400px){
+  h1{
+    font-size: 32px;
+  }
+  button{
+    width: 140px;
+  }
+  .order{
+    text-align: center;
+    align-items: center;
+  }
 }
