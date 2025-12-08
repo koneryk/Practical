@@ -13,8 +13,8 @@ body {
     padding: 15px 30px;
     color: #fff;
     flex-direction: row;
-    justify-content: space-between;
-    
+    justify-content: space-around;
+    flex-wrap: wrap;
   }
   .nav-bar_2{
         display: flex;
@@ -36,6 +36,8 @@ a {
 .nav-bar p {
     font-size: 1.5em;
     margin: 0;
+    text-align: center;
+    align-items: center;
 }
 
 .one_block {
@@ -209,4 +211,21 @@ button:hover {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position-x: -20px;
+}
+@media (max-width:300px) {
+    .nav-bar{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+    .nav-bar_2{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .one_block{
+        flex-wrap: wrap;
+    }
+    .nav_avtoriz{
+        text-align: center;
+    }
 }
