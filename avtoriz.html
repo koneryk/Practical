@@ -12,16 +12,24 @@
 <body>
     <section class="section_one_block">
         <div class="one_block">
+            <div class="image"></div>
             <h1>Вход в аккаунт</h1>
-            <input type="text" placeholder="Логин" class="input_login" id="input_login">
-            <input type="text" placeholder="Пароль" class="input_password" id="input_password">
-            <button id="loginBtn" class="avtorization">Войти</button>
-            <div class="silki">
-                <a href="./registration.html" class="registration">Регистрация</a>
-                <a href="./create_customers.html" class="create_customers">Создание заявки</a>
-                <a href="./customers.html" class="customers">Заявки</a>
+            <div class="div_wrapper">
+                <input type="text" placeholder="Логин" class="input_login" id="input_login">
+                <input type="text" placeholder="Пароль" class="input_password" id="input_password">
+                <button id="loginBtn" class="avtorization">Войти</button>
             </div>
+            
+            
         </div>
+        <footer>
+            <div class="silki">
+                <a href="./registration.html" class="registration"><p class="p_reg">Регистрация</p></a>
+                <a href="./create_customers.html" class="create_customers"><p class="p_create">Создание заявки</p></a>
+                <a href="./customers.html" class="customers"><p class="p_orders">Заявки</p></a>
+                <a href="./mega_admin.html" class="admin_href"><p class="p_admin">Админка</p></a>
+            </div>
+        </footer>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
         <script>
         //localStorage.clear()
@@ -42,8 +50,15 @@
                 password TEXT
             );`);
             return database;
+            
         }
     }
+    function hasColumn(db, tableName, columnName) {
+    const res = db.exec(`PRAGMA table_info(${tableName});`);
+    if (res.length === 0) return false; 
+    const columns = res[0].values.flat();
+    return columns.some(col => col === columnName);
+}
     function displayUsers() {
     const res = db.exec("SELECT * FROM users;");
     if (res.length === 0) {
@@ -62,32 +77,29 @@
 }
     db = loadDatabase();
 displayUsers()
-    document.getElementById('loginBtn').addEventListener('click', () => {
-        const usernameInput = document.getElementById('input_login').value.trim();
-        const passwordInput = document.getElementById('input_password').value.trim();
+document.getElementById('loginBtn').addEventListener('click', () => {
+    const usernameInput = document.getElementById('input_login').value.trim();
+    const passwordInput = document.getElementById('input_password').value.trim();
 
-        const stmt = db.prepare('SELECT * FROM users WHERE username = ? AND password = ?');
-        const result = stmt.get([usernameInput, passwordInput]);
-        if (result) {
-            user = result; 
-            localStorage.setItem("result", JSON.stringify(result));
-        } else {
-            user = null;
-        }
-        
-        
-        if (result && result != "") {
-            alert('Вход верный');
-            console.log(result)
-            
-            
-        } else {
-            alert('Неверный логин или пароль.');
-        }
-        stmt.free();
-        saveDatabase();
-        
-    });
+    const stmt = db.prepare('SELECT * FROM users WHERE username = ? AND password = ?');                     
+    const result = stmt.get([usernameInput, passwordInput]);
+
+if (result) {
+    if (usernameInput === 'Admin' && passwordInput === 'Password') {
+        localStorage.setItem('role', 'admin');
+        window.location.href = './mega_admin.html';
+    } else {
+        localStorage.setItem('role', 'user');
+        localStorage.setItem('result', JSON.stringify(result)); 
+        alert('Вход верный');
+    }
+} else {
+    alert('Неверный логин или пароль.');
+}
+
+    stmt.free();
+    saveDatabase();
+});
 
     function saveDatabase() {
         const data = db.export();

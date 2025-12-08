@@ -4,18 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="create_customers.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <section class="create_customers_section">
         <div class="create_customers">
             <h1 id="h1_id"></h1>
-            <input id="course" type="text">
-            <input id="data_course" type="date">
-            <input id="change_pay" type="text">
-            <button id="output">Отправить заявку</button>
-            <a href="./avtoriz.html" class="avtoriz_form">Вход</a>
+            <div class="div_input">
+              <input class="input_class" id="course" type="text">
+              <input class="input_class" id="data_course" type="date">
+              <input class="input_class" id="change_pay" type="text">
+            </div>
+
+            <button class="button_class" id="output">Отправить заявку</button>
+           
 
         </div>
+        <footer>
+           <a href="./avtoriz.html" class="avtoriz_form"><p>Вход</p></a>
+        </footer>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
     <script>
@@ -60,28 +70,31 @@
 
       const dbData = await load_sql();
       if (dbData) {
-        db = new SQL.Database(dbData);
-      } if (!dbData) {
-    db = new SQL.Database();
-    db.exec(`
-      CREATE TABLE IF NOT EXISTS Orders (
-        id_orders INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER,
-        course TEXT,
-        data_course TEXT,
-        change_pay TEXT,
-        State TEXT DEFAULT 'Новая',
-        Comments TEXT DEFAULT '',
-        FOREIGN KEY(user_id) REFERENCES Users(user_id)
-      );
-    `);
-    db.exec(`
-      CREATE TABLE IF NOT EXISTS Users (
-        user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT
-      );
-    `);
+  db = new SQL.Database(dbData);
+} else {
+  db = new SQL.Database();
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS Orders (
+      id_orders INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER,
+      course TEXT,
+      data_course TEXT,
+      change_pay TEXT,
+      State TEXT DEFAULT 'Новая',
+      Comments TEXT DEFAULT '',
+      FOREIGN KEY(user_id) REFERENCES Users(user_id)
+    );
+  `);
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS Users (
+      user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT
+    );
+  `);
 }
+
+
+displayOrders();
       user = await load_user();
 
       const h1_name = document.getElementById("h1_id");

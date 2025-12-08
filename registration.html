@@ -13,14 +13,24 @@
     <section class="section_one_block">
         <div class="one_block">
             <h1>Регистрация аккаунта</h1>
-            <input id="login" class="input" type="text" placeholder="Логин" />
-            <input id="password" class="input" type="text" placeholder="Пароль" />
-            <input id="FIO" class="input" type="text" placeholder="ФИО" />
-            <input id="telephone" class="input" type="tel" placeholder="Телефон" />
-            <input id="email" class="input" type="email" placeholder="Email" />
-            <button id="create_button" class="create">Регистрация</button>
-            <a href="./avtoriz.html" class="vhod">Вход</a>
+            <div class="reg_forma">
+                <input id="login" class="input" type="text" placeholder="Логин" />
+                <input id="password" class="input" type="text" placeholder="Пароль" />
+                <input id="FIO" class="input" type="text" placeholder="ФИО" />
+                <input id="telephone" class="input" type="tel" placeholder="Телефон" />
+                <input id="email" class="input" type="email" placeholder="Email" />
+                <button id="create_button" class="create">Регистрация</button>
+            </div>
+            
+
+            
         </div>
+        <footer>
+            <div class="silki">
+                <a href="./avtoriz.html" class="vhod"><p>Вход</p></a>
+            </div>
+            
+        </footer>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
@@ -66,6 +76,7 @@ async function initSqlJsAsync() {
                 telephone TEXT,
                 email TEXT,
                 id_orders INTEGER,
+                role TEXT default 'user',
                 FOREIGN KEY (user_id) REFERENCES Orders(user_id)
             );
         `);

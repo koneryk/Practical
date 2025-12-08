@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="customers.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <section class="section_one_block">
@@ -50,59 +54,70 @@
         
         const h1_name = document.getElementById("h1_id");
       if (user && user[1]) {
+        console.table(user)
         h1_name.textContent = `Добро пожаловать: ${user[1]}`;
       } else {
         h1_name.textContent = `Добро пожаловать, посетитель`;
       }
       displayOrders();
-      function displayOrders() {
-        console.log("Функция вызвана")
-  const container = document.getElementById('ordersContainer');
-  container.innerHTML = '';
-  
+function displayOrders() {
+    console.log("Функция вызвана");
+    const container = document.getElementById('ordersContainer');
+    container.innerHTML = '';
 
-  const res = db.exec("SELECT * FROM Orders;");
-  if (res.length === 0 || res[0].values.length === 0) {
-    container.innerHTML = "<p>Нет заказов</p>";
-    return;
-  }
-const tableInfoRes = db.exec("PRAGMA table_info(Orders);");
-console.log(tableInfoRes);
-  res[0].values.forEach(order => {
-    const [id_orders, user_id, course, data_course, change_pay, State, Comments] = order;
-
-    const orderDiv = document.createElement('div');
-    orderDiv.className = 'order';
-
-    orderDiv.innerHTML = `
-      <p>Заказ #${id_orders}</p>
-      <p>Курс: ${course}</p>
-      <p>Дата курса: ${data_course}</p>
-      <p>Способ оплаты: ${change_pay}</p>
-      <p>Статус: ${State}</p>
-      <p>Отзыв: ${Comments || 'Нет'}</p>
-      <button data-id="${id_orders}" class="leaveReview">Оставить отзыв</button>
-      <hr>
-    `;
-    container.appendChild(orderDiv);
-  });
-
-
-document.querySelectorAll('.leaveReview').forEach(btn => {
-  btn.onclick = () => {
-    const orderId = btn.getAttribute('data-id');
-    const review = prompt("Напишите ваш отзыв по заказу:");
-    if (review !== null && review.trim() !== '') {
-      db.run(`UPDATE Orders SET Comments = ? WHERE orders_id = ?;`, [review, orderId]);
-      
-      const data = db.export();
-      const binary = Array.from(data);
-      localStorage.setItem("sqlitedb", JSON.stringify(binary));
-      
-      displayOrders();
+    const res = db.exec("SELECT * FROM Orders;");
+    if (res.length === 0 || res[0].values.length === 0) {
+        container.innerHTML = "<p>Нет заказов</p>";
+        return;
     }
-  };
-});
+
+    const tableInfoRes = db.exec("PRAGMA table_info(Orders);");
+    const ordersData = res[0].values;
+
+    if (user && user[0]) {
+        const userId = user[0]; 
+        const userOrders = ordersData.filter(order => order[1] === userId);
+        
+        if (userOrders.length === 0) {
+            container.innerHTML = "<p>У вас нет заказов</p>";
+            return;
+        }
+        userOrders.forEach(order => {
+            const [id_orders, user_id, course, data_course, change_pay, State, Comments] = order;
+            const orderDiv = document.createElement('div');
+            orderDiv.className = 'order';
+
+            orderDiv.innerHTML = `
+              <p>Заказ #${id_orders}</p>
+              <p>Курс: ${course}</p>
+              <p>Дата курса: ${data_course}</p>
+              <p>Способ оплаты: ${change_pay}</p>
+              <p>Статус: ${State}</p>
+              <p>Отзыв: ${Comments || 'Нет'}</p>
+              <button data-id="${id_orders}" class="leaveReview">Оставить отзыв</button>
+              <hr>
+            `;
+            container.appendChild(orderDiv);
+        });
+    } else {
+        container.innerHTML = "<p>Пожалуйста, войдите для просмотра своих заказов.</p>";
+    }
+
+    document.querySelectorAll('.leaveReview').forEach(btn => {
+      btn.onclick = () => {
+        const orderId = btn.getAttribute('data-id');
+        const review = prompt("Напишите ваш отзыв по заказу:");
+        if (review !== null && review.trim() !== '') {
+          db.run(`UPDATE Orders SET Comments = ? WHERE orders_id = ?;`, [review, orderId]);
+          
+          const data = db.export();
+          const binary = Array.from(data);
+          localStorage.setItem("sqlitedb", JSON.stringify(binary));
+          
+          displayOrders();
+        }
+      };
+    });
 }
 
     })

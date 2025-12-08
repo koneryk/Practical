@@ -1,53 +1,101 @@
-*{
-    padding: 0;
-    margin: 0;
-    font-family: "Pacifico", cursive;
-  font-weight: 400;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
   font-style: normal;
 }
-.section_one_block{
-    width: 100%;
-    height: 100vh;
-    text-align: center;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    background: url(./image/blurred-office-background-illustration-ai-generative-free-photo.jpg);
-    background-size: cover;
-    background-position: center;
+
+.section_one_block {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #121212; 
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a); 
 }
-.one_block{
-    width: 700px;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: center;
-    align-items: center;
-    border: 1px solid black;
-    background-color: rgba(0, 0, 0, 0.2);
+
+.one_block {
+  width: 400px;
+  min-height: 600px;
+  background-color: rgba(20, 20, 20, 0.95); 
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; 
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); 
 }
-h1{
-    color:ivory;
-    font-family: "Pacifico", cursive;
-  font-weight: 400;
+
+h1 {
+  color: #ffffff; 
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "Unbounded", sans-serif;
+  font-optical-sizing: auto;
   font-style: normal;
+  font-size: xxx-large;
+  text-align: center;
 }
-.input{
-    width: 100px;
-    height: 25px;
-    background-color: rgba(0, 0, 0, 0);
+
+.reg_forma {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-.create{
-    width: 150px;
-    height: 70px;
-    border-color: blue;
-    color: black;
-    box-shadow: 0 0 40px 40px blue inset, 0 0 0 0 blue;
-    transition: all 150ms ease-in-out;
+input {
+  height: 60px;
+  padding: 0 20px;
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  font-family: "Unbounded", sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
-.create:hover{
-    box-shadow: 0 0 10px 0 blue inset, 0 0 10px 4px blue;
-    border: rgba(0, 0, 0, 0);
-    background-color: rgba(0, 0, 0, 0);
+
+input:focus {
+  outline: none;
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+button {
+  height: 60px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff; 
+  color: black;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: rgb(227, 225, 225);
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.vhod {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  font-family: "Unbounded", sans-serif;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.vhod:hover {
+  color: #ddd;
 }

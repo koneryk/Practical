@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="mega_admin.css">
+</head>
+<body>
+    <section class="one_block_section">
+        <div class="one_block">
+            <div id="ordersContainer"></div>
+            <a href="./avtoriz.html" class="vhod">Вход</a>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
+    <script>
+    const role = localStorage.getItem('role');
+
+if (role !== 'admin') {
+    alert('Доступ только для администраторов');
+    window.location.href = './avtoriz.html';
+}
+
+let db;
+
+initSqlJs({ locateFile: filename => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${filename}` }).then(SQL => {
+    const dataStr = localStorage.getItem('sqlitedb');
+    if (dataStr) {
+        const data = Uint8Array.from(JSON.parse(dataStr));
+        db = new SQL.Database(data);
+    } 
+
+    loadOrders(); 
+});
+
+function loadOrders() {
+    if (!db) {
+        console.error('База данных не инициализирована');
+        return;
+    }
+    const res = db.exec("SELECT * FROM Orders;");
+    const container = document.getElementById('ordersContainer');
+    container.innerHTML = '';
+
+    if (res.length === 0 || res[0].values.length === 0) {
+        container.innerHTML = 'Нет заявок.';
+        return;
+    }
+
+    const columns = res[0].columns;
+    const values = res[0].values;
+
+    const table = document.createElement('table');
+    table.border = '1';
+
+    const thead = document.createElement('thead');
+    const headRow = document.createElement('tr');
+
+    columns.forEach(col => {
+        const th = document.createElement('th');
+        th.innerText = col;
+        headRow.appendChild(th);
+    });
+
+    const thAction = document.createElement('th');
+    thAction.innerText = 'Действие';
+    headRow.appendChild(thAction);
+
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    values.forEach(row => {
+        const tr = document.createElement('tr');
+
+        row.forEach((cell, index) => {
+            const td = document.createElement('td');
+            td.innerText = cell;
+            tr.appendChild(td);
+        });
+
+        const orderIdIndex = columns.indexOf('orders_id');
+        const orderId = row[orderIdIndex];
+
+        const actionTd = document.createElement('td');
+        const btnChange = document.createElement('button');
+        btnChange.innerText = 'Изменить статус';
+
+        btnChange.onclick = () => {
+            const newStatus = prompt('Введите новый статус: "Новая", "Идет обучение", "Обучено"', 'Новая');
+            if (newStatus) {
+                db.exec(`UPDATE Orders SET State = ? WHERE orders_id = ?`, [newStatus, orderId]);
+                saveDatabase();
+                loadOrders(); 
+            }
+        };
+
+        actionTd.appendChild(btnChange);
+        tr.appendChild(actionTd);
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+}
+
+function saveDatabase() {
+    if (!db) return;
+    const data = db.export();
+    const dataStr = JSON.stringify(Array.from(new Uint8Array(data)));
+    localStorage.setItem('sqlitedb', dataStr);
+}
+    </script>
+</body>
+</html>
