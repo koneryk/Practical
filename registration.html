@@ -15,11 +15,101 @@
             <h1>Регистрация аккаунта</h1>
             <div class="reg_forma">
                 <input id="login" class="input" type="text" placeholder="Логин" />
-                <input id="password" class="input" type="text" placeholder="Пароль" />
+                <input id="password" class="input" type="password" placeholder="Пароль" />
                 <input id="FIO" class="input" type="text" placeholder="ФИО" />
-                <input id="telephone" class="input" type="tel" placeholder="Телефон" />
+                <input id="telephone" value="+7" name="phone" class="input2" type="tel" placeholder="Телефон" />
                 <input id="email" class="input" type="email" placeholder="Email" />
-                
+                <div id="error-message" style="color: red; margin-top: 10px;"></div>
+                <script>
+                    const input = document.getElementById('telephone');
+
+input.addEventListener('input', () => {
+  let value = input.value;
+  let digits = '';
+  for (let i = 0; i < value.length; i++) {
+    if (value[i] >= '0' && value[i] <= '9') {
+      digits += value[i];
+    }
+  }
+
+  if (digits.length === 0 || digits[0] !== '7') {
+    digits = '7' + digits;
+  } else {
+    digits = '7' + digits.slice(1);
+  }
+
+  if (digits.length > 12) {
+    digits = digits.slice(0, 12);
+  }
+  input.value = '+' + digits;
+});
+const z = document.getElementById('email');
+
+z.addEventListener('input', () => {
+  const emailValue = z.value;
+  console.log(z.checkValidity())
+  if (z.checkValidity()) {
+    z.style.borderColor = '';
+  } else {
+    z.style.borderColor = 'red';
+  }
+});
+const loginInput = document.getElementById('login');
+const passwordInput = document.getElementById('password');
+const FIOInput = document.getElementById('FIO');
+const errorMessageDiv = document.getElementById('error-message');
+
+loginInput.addEventListener('input', () => {
+  const login = loginInput.value;
+  
+  if (login.length < 6) {
+    errorMessageDiv.textContent = 'Логин должен быть не менее 6 символов.';
+    return;
+  }
+
+  for (let i = 0; i < login.length; i++) {
+    const ch = login[i];
+    if (
+      !(
+        (ch >= 'A' && ch <= 'Z') ||
+        (ch >= 'a' && ch <= 'z') ||
+        (ch >= '0' && ch <= '9')
+      )
+    ) {
+      errorMessageDiv.textContent = 'Логин должен содержать только латинские буквы и цифры.';
+      return;
+    }
+  }
+  errorMessageDiv.textContent = '';
+});
+
+passwordInput.addEventListener('input', () => {
+  if (passwordInput.value.length < 8) {
+    errorMessageDiv.textContent = 'Пароль должен быть не менее 8 символов.';
+  } else {
+    errorMessageDiv.textContent = '';
+  }
+});
+
+FIOInput.addEventListener('input', () => {
+  const FIO = FIOInput.value;
+  for (let i = 0; i < FIO.length; i++) {
+    const ch = FIO[i];
+    if (
+      !(
+        (ch >= 'А' && ch <= 'Я') ||
+        (ch >= 'а' && ch <= 'я') ||
+        ch === 'Ё' || ch === 'ё' ||
+        ch === ' '
+      )
+    ) {
+      errorMessageDiv.textContent = 'ФИО должно содержать только кириллические буквы и пробелы.';
+      return;
+    }
+  }
+  errorMessageDiv.textContent = '';
+});
+                </script>
             </div>
             
             <div class="silki">
