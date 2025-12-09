@@ -16,8 +16,8 @@
 .image_pre{
   background-image: url(./image/i-no-bg-preview\ \(carve.photos\).png);
   background-size: contain;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
 .one_block {
   background-color: rgba(10, 25, 60, 0.95);
