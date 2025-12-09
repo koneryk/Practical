@@ -1,113 +1,176 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  transition: 0.3s ease;
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
+body {
+  background-color: #e0f7fa; 
+  color: #333;
+  line-height: 1.6;
+}
 .section_one_block {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  background-color: #f0f8ff;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #b2ebf2, #80deea);
   color: #333;
 }
 
 .one_block {
   width: 100%;
-  height: 100%;
+  max-width: 800px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  text-align: center;
   align-items: center;
+  gap: 30px;
 }
 
 h1 {
+  font-family: "Unbounded", sans-serif;
   font-size: 3rem;
-  color: #007acc;
+  color: #0066cc;
   text-transform: uppercase;
   font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
 }
 
 p {
+  font-family: "Unbounded", sans-serif;
   color: #005999;
   font-size: 1.1rem;
   line-height: 1.4;
   max-width: 600px;
+  text-align: center;
 }
 
 a {
   color: #007acc;
   text-decoration: none;
+  font-size: 1.1rem;
+}
+a:hover {
+  text-decoration: underline;
 }
 
 .div_wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 280px;
+  height: auto;
+  min-height: 280px;
   max-width: 400px;
   width: 100%;
+  margin: 0 auto;
+  gap: 15px;
 }
 
 input {
   width: 100%;
-  max-width: 400px;
   padding: 15px;
+  font-family: "Unbounded", sans-serif;
   font-size: 1rem;
-  background-color: rgba(0, 122, 204, 0.1);
-  border: 1px solid #007acc;
-  border-radius: 5px;
-  color: #005999;
+  background-color: rgba(0, 150, 199, 0.1);
+  border: 1px solid #0066cc;
+  border-radius: 8px;
+  color: #333;
+  transition: all 0.3s ease;
+}
+input:focus {
   outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 8px rgba(0, 102, 204, 0.5);
+  background-color: rgba(0, 150, 199, 0.2);
 }
 
 button {
+  height: 60px;
   width: 100%;
   max-width: 400px;
-  padding: 15px;
-  font-size: 1rem;
+  padding: 0 20px;
+  font-family: "Unbounded", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
   color: #fff;
-  background-color: #007acc;
+  background-color: #0096c7;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #005fa3;
-}
-
-.image {
-  width: 200px;
-  height: 200px;
-  background-image: url(./image/image03.png);
-  background-position: center;
-  background-size: cover;
   border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+button:hover {
+  background-color: #0077b6;
+  outline: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+#ordersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.order {
+  background-color: #f0f8fa;
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.order:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
+}
+.order p {
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: #555;
+}
+.leaveReview {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background-color: #3399ff;
+  color: #1e1e1e;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.leaveReview:hover {
+  background-color: #0077e6;
+}
+.leaveReview:active {
+  transform: scale(0.97);
+}
+
+.vhod {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #3399ff;
+  color: #1e1e1e;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+.vhod:hover {
+  background-color: #0077e6;
 }
 
 footer {
+  width: 100%; 
   background-color: #e6f2ff;
   padding: 60px 20px;
   text-align: center;
   color: #005999;
-}
-
-.silki {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.silki a {
-  color: #007acc;
-  font-weight: 500;
+  box-sizing: border-box; 
 }
 
 @media (max-width: 600px) {
@@ -120,20 +183,19 @@ footer {
   }
 
   .div_wrapper {
-    height: auto;
-    gap: 15px;
+    width: 90%;
   }
 
   input, button {
     width: 90%;
   }
 
-  .image {
-    width: 150px;
-    height: 150px;
+  #ordersContainer {
+    gap: 15px;
   }
 
-  footer {
-    padding: 30px 10px;
+  .order {
+    text-align: center;
+    align-items: center;
   }
 }

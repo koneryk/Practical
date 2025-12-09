@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,19 +24,16 @@
                     <a href="./registration.html" class="registration"><p class="p_reg">Регистрация</p></a>
                 </div>
             </div>
-            
-            
-        </div>
-        <footer>
-            <div class="silki">
-                <a href="./create_customers.html" class="create_customers"><p class="p_create">Создание заявки</p></a>
-                <a href="./customers.html" class="customers"><p class="p_orders">Заявки</p></a>
-                <a href="./mega_admin.html" class="admin_href"><p class="p_admin">Админка</p></a>
+             <div class="silki">
                 <a href="./landing.html" class="main">Основная страница</a>
             </div>
-        </footer>
+            
+        </div>
+           
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
         <script>
+            
         //localStorage.clear()
             initSqlJs({ locateFile: filename => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${filename}` })
 .then(SQL => {
@@ -87,18 +85,22 @@ document.getElementById('loginBtn').addEventListener('click', () => {
 
     const stmt = db.prepare('SELECT * FROM users WHERE username = ? AND password = ?');                     
     const result = stmt.get([usernameInput, passwordInput]);
-
-if (result) {
-    if (usernameInput === 'Admin' && passwordInput === 'Password') {
-        localStorage.setItem('role', 'admin');
-        window.location.href = './mega_admin.html';
-    } else {
-        localStorage.setItem('role', 'user');
-        localStorage.setItem('result', JSON.stringify(result)); 
-        alert('Вход верный');
-    }
+    console.log(typeof result)
+    console.log('Result:', result);
+console.log('Пустые поля:', !usernameInput && !passwordInput);
+    
+if (result !== undefined && usernameInput !== '' && passwordInput !== '') {
+  if (usernameInput === 'Admin' && passwordInput === 'KorokNET') {
+    localStorage.setItem('role', 'admin');
+    window.location.href = './mega_admin.html';
+  } else {
+    localStorage.setItem('role', 'user');
+    localStorage.setItem('result', JSON.stringify(result));
+    window.location.href = './customers.html';
+    alert('Вход верный');
+  }
 } else {
-    alert('Неверный логин или пароль.');
+  alert('Неверный логин или пароль.');
 }
 
     stmt.free();
