@@ -29,6 +29,28 @@
         </div>
           
     </section>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const dateInput = document.getElementById('data_course');
+
+  dateInput.addEventListener('keydown', (e) => {
+    e.preventDefault();
+  });
+
+  const today = new Date();
+  const nextYear = new Date(today.getFullYear() + 1, today.getMonth(), today.getDate());
+
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  dateInput.max = formatDate(nextYear);
+  dateInput.min = formatDate(today);
+});
+</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
     <script>
  initSqlJs({ locateFile: filename => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${filename}` })
