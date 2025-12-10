@@ -30,7 +30,7 @@
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
         <script>
-            
+        
         //localStorage.clear()
             initSqlJs({ locateFile: filename => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/${filename}` })
 .then(SQL => {
@@ -109,6 +109,7 @@ if (result !== undefined && usernameInput !== '' && passwordInput !== '') {
         localStorage.setItem('sqlitedb', JSON.stringify(Array.from(data)));
     }
 });
+
         </script>
     </section>
 </body>

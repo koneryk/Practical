@@ -67,36 +67,38 @@ h1 {
 
 
 a {
-
-
-  color: black;
-  border: none;
+    color: black;
+    border: none;
     display: inline-block;
-  padding: 12px 24px;
-  background-color: #3399ff; 
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.2s;
+    padding: 12px 24px;
+    background-color: #3399ff; 
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    
 }
 
 button {
     color: black;
     border: none;
     display: inline-block;
-  padding: 12px 24px;
-  background-color: #3399ff; 
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.2s;
+    padding: 12px 24px;
+    background-color: #3399ff; 
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
 }
 
 button:hover {
     background-color: #3399cc; 
     outline: 1px solid rgba(0,0,0,0.2);
 }
-
+a:hover{
+    background-color: #3399cc; 
+    outline: 1px solid rgba(0,0,0,0.2);
+}
 footer {
     background-color: #f0f8ff; 
     padding-top: 75px;
@@ -142,10 +144,20 @@ footer {
     flex-direction: column;
     gap: 20px;
     border-radius: 8px;
-    max-width: 300px;
+    max-width: 400px;
     min-width: 200px;
     width: 100%;
 }
 .input_class2{
     width: 100%;
+}
+.qwe{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+.silki{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }

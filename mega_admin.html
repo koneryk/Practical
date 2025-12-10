@@ -36,78 +36,95 @@ initSqlJs({ locateFile: filename => `https://cdnjs.cloudflare.com/ajax/libs/sql.
     loadOrders(); 
 });
 
-function loadOrders() {
-    if (!db) {
-        console.error('База данных не инициализирована');
-        return;
-    }
-    const res = db.exec("SELECT * FROM Orders;");
-    const container = document.getElementById('ordersContainer');
-    container.innerHTML = '';
-
-    if (res.length === 0 || res[0].values.length === 0) {
-        container.innerHTML = 'Нет заявок.';
-        return;
-    }
-
-    const columns = res[0].columns;
-    const values = res[0].values;
-
-    const table = document.createElement('table');
-    table.border = '1';
-
-    const thead = document.createElement('thead');
-    const headRow = document.createElement('tr');
-
-    columns.forEach(col => {
-        const th = document.createElement('th');
-        th.innerText = col;
-        headRow.appendChild(th);
-    });
-
-    const thAction = document.createElement('th');
-    thAction.innerText = 'Действие';
-    headRow.appendChild(thAction);
-
-    thead.appendChild(headRow);
-    table.appendChild(thead);
-
-    const tbody = document.createElement('tbody');
-
-    values.forEach(row => {
-        const tr = document.createElement('tr');
-
-        row.forEach((cell, index) => {
-            const td = document.createElement('td');
-            td.innerText = cell;
-            tr.appendChild(td);
-        });
-
-        const orderIdIndex = columns.indexOf('orders_id');
-        const orderId = row[orderIdIndex];
-
-        const actionTd = document.createElement('td');
-        const btnChange = document.createElement('button');
-        btnChange.innerText = 'Изменить статус';
-
-        btnChange.onclick = () => {
-            const newStatus = prompt('Введите новый статус: "Новая", "Идет обучение", "Обучено"', 'Новая');
-            if (newStatus) {
-                db.exec(`UPDATE Orders SET State = ? WHERE orders_id = ?`, [newStatus, orderId]);
-                saveDatabase();
-                loadOrders(); 
+ function loadOrders() {
+            if (!db) {
+                console.error('База данных не инициализирована');
+                return;
             }
-        };
+            const res = db.exec("SELECT * FROM Orders;");
+            const container = document.getElementById('ordersContainer');
+            container.innerHTML = '';
 
-        actionTd.appendChild(btnChange);
-        tr.appendChild(actionTd);
-        tbody.appendChild(tr);
-    });
+            if (res.length === 0 || res[0].values.length === 0) {
+                container.innerHTML = 'Нет заявок.';
+                return;
+            }
 
-    table.appendChild(tbody);
-    container.appendChild(table);
-}
+            const columns = res[0].columns;
+            const values = res[0].values;
 
+            const table = document.createElement('table');
+            table.border = '1';
+
+            const thead = document.createElement('thead');
+            const headRow = document.createElement('tr');
+
+            columns.forEach(col => {
+                const th = document.createElement('th');
+                th.innerText = col;
+                headRow.appendChild(th);
+            });
+
+            const thAction = document.createElement('th');
+            thAction.innerText = 'Действие';
+            headRow.appendChild(thAction);
+
+            thead.appendChild(headRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+
+            values.forEach(row => {
+                const tr = document.createElement('tr');
+
+                row.forEach((cell, index) => {
+                    const td = document.createElement('td');
+                    td.innerText = cell;
+                    tr.appendChild(td);
+                });
+
+                const idIndex = columns.indexOf('orders_id');
+                const orderId = row[idIndex];
+
+                const statusIndex = columns.indexOf('State');
+                const currentStatus = row[statusIndex];
+
+                const actionTd = document.createElement('td');
+
+                const select = document.createElement('select');
+                select.style.minWidth = '150px';
+
+                const statuses = ['Новая', 'Идет обучение', 'Обучено'];
+
+                statuses.forEach(status => {
+                    const option = document.createElement('option');
+                    option.value = status;
+                    option.innerText = status;
+                    if (status === currentStatus) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                });
+                select.onchange = () => {
+                    const newStatus = select.value;
+                    const query = `UPDATE Orders SET State = '${newStatus}' WHERE orders_id = ${orderId};`;
+                    try {
+                        db.exec(query);
+                        saveDatabase();
+                        loadOrders(); 
+                    } catch (e) {
+                        alert('Ошибка обновления: ' + e.message);
+                    }
+                };
+
+                actionTd.appendChild(select);
+                tr.appendChild(actionTd);
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            container.appendChild(table);
+        }
 function saveDatabase() {
     if (!db) return;
     const data = db.export();

@@ -71,7 +71,7 @@ input:focus {
 }
 
 button {
-  height: 60px;
+  height: 100%;
   border: none;
   border-radius: 8px;
   background-color: #0096c7; 
@@ -168,4 +168,9 @@ button:hover {
     text-align: center;
     align-items: center;
   }
+}
+.silki{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
 }

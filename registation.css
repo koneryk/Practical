@@ -53,6 +53,7 @@ p {
   max-width: 600px;
   text-align: center;
   transition-duration: 0.3s;
+  text-decoration: none;
 }
 
 a {
@@ -69,9 +70,6 @@ a {
   border-radius: 8px;
   cursor: pointer;
   transition-duration: 0.3s;
-}
-a:hover {
-  text-decoration: underline;
 }
 
 .div_wrapper {
@@ -118,6 +116,7 @@ button, .create {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 button:hover {
   background-color: #0077b6; 
@@ -126,6 +125,7 @@ button:hover {
 a:hover {
   background-color: #0077b6; 
   outline: 1px solid rgba(0, 0, 0, 0.2);
+  text-decoration: none;
 }
 #ordersContainer {
   display: flex;
@@ -145,7 +145,6 @@ a:hover {
   box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
 }
 .order p {
-  margin-bottom: 8px;
   line-height: 1.4;
   color: #555;
 }
@@ -241,4 +240,8 @@ footer {
     border-radius: 8px;
     cursor: pointer;
     transition-duration: 0.3s;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
