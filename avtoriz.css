@@ -6,6 +6,8 @@ body {
   background-color: #e0f7fa; 
   color: #333;
   line-height: 1.6;
+  background: url(./image/image11.jpg) no-repeat;
+  background-size: cover;
 }
 .section_one_block {
   width: 100%;
@@ -14,7 +16,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(135deg, #b2ebf2, #80deea);
+  
   color: #333;
 }
 

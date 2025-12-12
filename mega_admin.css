@@ -11,7 +11,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0a1f44, #1e3a8a);
+  background: url(./image/image07.jpg) no-repeat;
+  background-size: cover;
 }
 .image_pre{
   background-image: url(./image/i-no-bg-preview\ \(carve.photos\).png);
@@ -20,7 +21,7 @@
   height: 150px;
 }
 .one_block {
-  background-color: rgba(10, 25, 60, 0.95);
+  background-color: white;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 8px 20px rgba(0, 30, 80, 0.6);
@@ -30,16 +31,35 @@
   gap: 20px;
   align-items: center;
 }
-
+button {
+    height: 60px;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 20px;
+    font-family: "Unbounded", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0096c7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 .vhod {
   align-self: flex-end;
-  color: #a5d8ff;
+  color: white;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
   transition: color 0.3s ease;
-}
 
+}
+select{
+      background-color: rgb(125 166 201);
+      color: white;
+      border-radius: 5px;
+}
 .vhod:hover {
   color: #e0f2ff;
 }

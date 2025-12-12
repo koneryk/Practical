@@ -19,7 +19,8 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: linear-gradient(135deg, #b2ebf2, #80deea);
+  background: url(./image/image08.webp) no-repeat;
+  background-size: cover;
   color: #333;
 }
 

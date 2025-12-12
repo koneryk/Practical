@@ -14,8 +14,9 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background: linear-gradient(135deg, #b2ebf2, #80deea);
-    align-items: center; 
+    background: url(./image/image09.webp) no-repeat;
+    background-size: cover;
+    align-items: center;
 }
 
 .create_customers {
