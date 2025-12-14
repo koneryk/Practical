@@ -24,6 +24,7 @@
               </div>
               
             </div>
+            <div id="message"></div>
             <div class="silki">
               <button class="button_class" id="output">Отправить заявку</button>
               <a href="./customers.html" class="button_class"><p>Заявки</p></a>
@@ -124,12 +125,7 @@
 displayOrders();
       user = await load_user();
 
-      const h1_name = document.getElementById("h1_id");
-      if (user && user[1]) {
-        h1_name.textContent = `Добро пожаловать: ${user[1]}`;
-      } else {
-        h1_name.textContent = `Добро пожаловать, посетитель`;
-      }
+    
 
       document.getElementById("output").addEventListener("click", () => {
         if (!user || !user[0]) {
@@ -142,7 +138,9 @@ displayOrders();
         const changePay = document.getElementById("change_pay").value.trim();
 
         if (!course || !dataDate || !changePay) {
-          alert("Пожалуйста, заполните все поля.");
+          const message = document.getElementById("message")
+          message.style = "color:red;"
+          message.innerText = "Пожалуйста, заполните все поля."
           return;
         }
 
@@ -158,8 +156,13 @@ displayOrders();
         const data = db.export();
         const binary = Array.from(data);
         localStorage.setItem("sqlitedb", JSON.stringify(binary));
-
-        alert("Заказ добавлен!");
+        const message = document.getElementById("message")
+        message.innerText = "Заказ добавлен!"
+        message.style = "color: green;"
+        setTimeout(() => {
+          message.innerText = ""
+          window.location.href = "./customers.html"
+        }, 3000);
       });
 displayOrders()
     });

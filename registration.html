@@ -19,7 +19,7 @@
                 <input id="FIO" class="input" type="text" placeholder="ФИО" />
                 <input id="telephone" value="+7" name="phone" class="input2" type="tel" placeholder="Телефон" />
                 <input id="email" class="input" type="email" placeholder="Email" />
-                <div id="error-message" style="color: red; margin-top: 10px;"></div>
+                <div id="error-message" style="color: red; margin-top: 10px;text-align: center;"></div>
                 <script>
                     const input = document.getElementById('telephone');
 
@@ -230,8 +230,16 @@ async function main() {
                 const stmt = db.prepare(`INSERT INTO users (username, password, FIO, telephone, email) VALUES (?, ?, ?, ?, ?)`);
                 stmt.run([login, password, FIO, telephone, email]);
                 stmt.free();
+                const errorMessageDiv = document.getElementById('error-message');
+                errorMessageDiv.style = "color: green;text-align:center;"
+                errorMessageDiv.innerText = "Успешная регистрация"
 
-                alert('Пользователь зарегистрирован!');
+                setTimeout(() => {
+                  errorMessageDiv.style = "color: green;"
+                  errorMessageDiv.innerText = ""
+                  window.location.href = "./avtoriz.html"
+                }, 3000);
+                
                 saveDatabase(); 
                 displayUsers();
             } catch (e) {

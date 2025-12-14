@@ -14,12 +14,7 @@
   background: url(./image/image07.jpg) no-repeat;
   background-size: cover;
 }
-.image_pre{
-  background-image: url(./image/i-no-bg-preview\ \(carve.photos\).png);
-  background-size: contain;
-  width: 150px;
-  height: 150px;
-}
+
 .one_block {
   background-color: white;
   border-radius: 15px;

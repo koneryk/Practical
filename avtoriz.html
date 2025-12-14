@@ -15,15 +15,18 @@
         <div class="one_block">
             <div class="image"></div>
             <h1>Вход в аккаунт "Корочки.есть"</h1>
-            <div class="div_wrapper">
+            <form  class="div_wrapper">
                 <input type="text" placeholder="Логин" class="input_login" id="input_login">
                 <input type="password" placeholder="Пароль" class="input_password" id="input_password">
-                <button id="loginBtn" class="avtorization">Войти</button>
+                <button type="submit" id="loginBtn" class="avtorization">Войти</button>
+                <div class="error-message" id="error-message"></div>
                 <div class="text-box">
                     <p>Не зарегистрированны?</p>
                     <a href="./registration.html" class="registration"><p class="p_reg">Регистрация</p></a>
                 </div>
-            </div>
+                
+
+            </form>
             
         </div>
            
@@ -75,7 +78,8 @@
 }
     db = loadDatabase();
 displayUsers()
-document.getElementById('loginBtn').addEventListener('click', () => {
+document.querySelector('.div_wrapper').addEventListener('submit', function(e) {
+    e.preventDefault(); 
     const usernameInput = document.getElementById('input_login').value.trim();
     const passwordInput = document.getElementById('input_password').value.trim();
 
@@ -89,20 +93,51 @@ if (result !== undefined && usernameInput !== '' && passwordInput !== '') {
   if (usernameInput === 'Admin' && passwordInput === 'KorokNET') {
     localStorage.setItem('role', 'admin');
     window.location.href = './mega_admin.html';
-  } else {
+
+    return
+  } if (result.length !== 0) {
     localStorage.setItem('role', 'user');
     localStorage.setItem('result', JSON.stringify(result));
     window.location.href = './customers.html';
-    alert('Вход верный');
+    return
   }
-} else {
-  alert('Неверный логин или пароль.');
+  if(result.length === 0) {
+    const usernameInput = document.getElementById('input_login').value.trim();
+    const passwordInput = document.getElementById('input_password').value.trim();
+    const error_message = document.getElementById("error-message")
+    error_message.innerText = "Неправильный пароль и/или логин"
+    error_message.className = "error_message"
+    return
 }
+} else {
+    const usernameInput = document.getElementById('input_login').value.trim();
+    const passwordInput = document.getElementById('input_password').value.trim();
+    const error_message = document.getElementById("error-message")
+    if (usernameInput == "" && passwordInput == ""){
+        error_message.innerText = "Неправильный пароль и/или логин"
+        error_message.className = "error_message"
+    }
+    if (usernameInput != "" && passwordInput != "" && result.length === 0){
+        error_message.innerText = "Неправильный пароль и/или логин"
+        error_message.className = "error_message"
+    }
+    if((usernameInput != "" && passwordInput == "") || usernameInput == "" && passwordInput != "" ){
+        error_message.innerText = "Заполните все поля"
+        error_message.className = "error_message"
+    }
+    
+}
+
 
     stmt.free();
     saveDatabase();
 });
 
+
+document.querySelector('.div_wrapper').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    document.getElementById('loginBtn').click();
+});
     function saveDatabase() {
         const data = db.export();
         localStorage.setItem('sqlitedb', JSON.stringify(Array.from(data)));
