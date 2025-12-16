@@ -6,8 +6,8 @@
 }
 
 .one_block_section {
-  width: 100%;
-  height: 100%;
+  width: 1000%;
+  height: 1000%;
   display: flex;
   justify-content: center;
   align-items: center;
