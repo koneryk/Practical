@@ -9,8 +9,8 @@ height:100vh;
 width:100%;
 }
 .one_block_section {
-  width: 100%;
-  height: 100%;
+  width: inherit;
+  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
