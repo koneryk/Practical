@@ -8,6 +8,7 @@ body {
   line-height: 1.6;
   background: url(./image/image11.jpg) no-repeat;
   background-size: cover;
+margin:0;
 }
 .section_one_block {
   width: 100%;
