@@ -13,8 +13,9 @@ body {
 }
 
 .section_one_block {
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 95vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
