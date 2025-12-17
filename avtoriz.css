@@ -12,7 +12,7 @@ margin:0;
 }
 .section_one_block {
   width: 100%;
-  min-height: 98vh;
+  min-height: 100vh;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -211,4 +211,5 @@ footer {
     text-align: center;
     align-items: center;
   }
+
 }
