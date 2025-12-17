@@ -11,7 +11,7 @@ body {
 }
 .section_one_block {
   width: 100%;
-  min-height: 95vh;
+  min-height: 98vh;
   height: 100%;
   display: flex;
   justify-content: center;
